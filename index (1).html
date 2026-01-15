@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>IM'S </title>
+
+<style>
+body{
+  font-family: Arial, sans-serif;
+  margin:0;
+  background:#f4f6f8;
+}
+header{
+  background:#2c3e50;
+  color:white;
+  text-align:center;
+  padding:20px;
+}
+nav{
+  background:#34495e;
+  text-align:center;
+  padding:10px;
+  display:none;
+}
+nav button{
+  background:none;
+  border:none;
+  color:white;
+  padding:10px 15px;
+  cursor:pointer;
+  font-size:15px;
+}
+nav button:hover{
+  background:#2c3e50;
+}
+section{
+  display:none;
+  padding:20px;
+}
+.active{
+  display:block;
+}
+.center{
+  text-align:center;
+  margin-top:60px;
+}
+input{
+  padding:10px;
+  margin:6px;
+  width:240px;
+}
+button{
+  padding:10px 20px;
+  background:#2c3e50;
+  color:white;
+  border:none;
+  cursor:pointer;
+}
+.gallery div{
+  background:#dcdde1;
+  height:100px;
+  width:120px;
+  margin:5px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:6px;
+}
+.founder img{
+  width:150px;
+  border-radius:10px;
+}
+footer{
+  background:#2c3e50;
+  color:white;
+  text-align:center;
+  padding:10px;
+}
+#error{
+  color:red;
+  margin-top:10px;
+}
+table{
+  width:100%;
+  border-collapse:collapse;
+}
+th, td{
+  border:1px solid #ccc;
+  padding:8px;
+  text-align:center;
+}
+th{
+  background:#ecf0f1;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>IM'S ignite moment studies</h1>
+  <p>Student Mentor by Vivek Thakur and Vijay Yadav</p>
+</header>
+
+<nav id="menu">
+  <button onclick="showSection('studentCorner')">Student Corner</button>
+  <button onclick="showSection('gallery')">Gallery</button>
+  <button id="attBtn" onclick="showSection('attendance')">Attendance</button>
+  <button id="listBtn" onclick="showSection('studentList')">Student List</button>
+  <button onclick="showSection('testSchedule')">Test Schedule</button>
+  <button onclick="showSection('announcements')">Announcements</button>
+  <button onclick="showSection('founder')">Founder & CEO</button>
+  <button onclick="logout()">Logout</button>
+</nav>
+
+<!-- LOGIN -->
+<section id="login" class="center active">
+  <h2>Student / Admin Login</h2>
+  <input id="username" placeholder="Username"><br>
+  <input id="password" type="password" placeholder="Password"><br>
+  <button onclick="login()">Login</button>
+  <p id="error"></p>
+
+  <p><b>Admin:</b> admin / admin123</p>
+  <p><b>Student:</b> student / student123</p>
+</section>
+
+<!-- STUDENT CORNER -->
+<section id="studentCorner">
+  <h2>Student Corner</h2>
+  <p>📘 Study material, mentoring support, exam guidance.</p>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <h2>Gallery</h2>
+  <div class="gallery">
+    <div>Classroom</div>
+    <div>Workshop</div>
+    <div>Event</div>
+  </div>
+</section>
+
+<!-- ATTENDANCE -->
+<section id="attendance">
+  <h2>Attendance</h2>
+  <table>
+    <tr><th>Name</th><th>Status</th></tr>
+    <tr><td>Aman Kumar</td><td>Present</td></tr>
+    <tr><td>Riya Sharma</td><td>Absent</td></tr>
+    <tr><td>muskan Khan</td><td>Present</td></tr>
+  </table>
+</section>
+
+<!-- STUDENT LIST -->
+<section id="studentList">
+  <h2>Student List</h2>
+  <ul>
+    <li>Aman Kumar</li>
+    <li>Riya Sharma</li>
+    <li>Muskan Khan</li>
+    <li>Rahul Verma</li>
+  </ul>
+</section>
+
+<!-- TEST SCHEDULE -->
+<section id="testSchedule">
+  <h2>Test Schedule</h2>
+  <p>📝 Math Test – 20 January</p>
+  <p>🧪 Science Test – 25 January</p>
+  <p>📚 Mock Exam – 30 January</p>
+</section>
+
+<!-- ANNOUNCEMENTS -->
+<section id="announcements">
+  <h2>Announcements</h2>
+  <p>📢 New batch starting soon</p>
+  <p>📢 Parent meeting on Sunday</p>
+</section>
+
+<!-- FOUNDER -->
+<section id="founder" class="founder">
+  <h2>Founder & CEO</h2>
+  <img src="https://via.placeholder.com/150" alt="Muskan Khan">
+  <h3>Muskan Khan</h3>
+  <p>
+    Founder & CEO Vivek Thakur . Dedicated student mentor focused on
+    academic excellence, confidence building, and student success.
+  </p>
+</section>
+
+<footer>
+  © Found IM'S
+</footer>
+
+<script>
+let role = "";
+
+function login(){
+  const u = username.value;
+  const p = password.value;
+
+  if(u==="admin" && p==="admin123"){
+    role = "admin";
+  }
+  else if(u==="student" && p==="student123"){
+    role = "student";
+  }
+  else{
+    error.innerText = "Invalid login details";
+    return;
+  }
+
+  login.style.display="none";
+  menu.style.display="block";
+
+  if(role === "student"){
+    attBtn.style.display="none";
+    listBtn.style.display="none";
+  }
+
+  showSection("studentCorner");
+}
+
+function showSection(id){
+  document.querySelectorAll("section").forEach(sec=>{
+    sec.classList.remove("active");
+  });
+  document.getElementById(id).classList.add("active");
+}
+
+function logout(){
+  location.reload();
+}
+</script>
+
+</body>
+</html>
